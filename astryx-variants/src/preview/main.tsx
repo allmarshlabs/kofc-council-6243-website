@@ -32,9 +32,10 @@ const pageKeys: PageKey[] = ['home', 'calendar', 'join', 'gallery', 'contact'];
 
 // #/v1/join, #/v3/home … ; unprefixed links (#/join) come from the
 // Variant 2 code (the main index.html build), so they stay on Variant 2.
+// Opening preview.html with no hash starts on Variant 1 (Heritage).
 function parse(): { v: VKey; page: PageKey } {
   const parts = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
-  const v = (parts[0] in variants ? parts[0] : 'v2') as VKey;
+  const v = (parts.length === 0 ? 'v1' : parts[0] in variants ? parts[0] : 'v2') as VKey;
   const last = parts[parts.length - 1];
   const page = (pageKeys as string[]).includes(last) ? (last as PageKey) : 'home';
   return { v, page };
