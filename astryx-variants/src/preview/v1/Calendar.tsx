@@ -40,7 +40,7 @@ import {
 import type {PageProps} from '../../App';
 import {council, meetings, meetingsNote} from '../../shared/content';
 import {Shell} from './Shell';
-import {upcomingMeetings, formatLong, ordinal} from './schedule';
+import {upcomingMeetings, formatLong} from './schedule';
 
 const styles = stylex.create({
   frame: {
@@ -56,14 +56,6 @@ const mailto = `mailto:${council.email}?subject=${encodeURIComponent(
   'Council 6243 meeting time',
 )}`;
 
-// ─── Bullet separator ───────────────────────────────────────────────────────
-function Bullet() {
-  return (
-    <Text type="supporting" color="secondary">
-      {'・'}
-    </Text>
-  );
-}
 
 // ─── Page Header ────────────────────────────────────────────────────────────
 function PageHeader({isNarrow}: {isNarrow: boolean}) {
@@ -96,21 +88,7 @@ function PageHeader({isNarrow}: {isNarrow: boolean}) {
               <Text type="display-2" as="h1">
                 Council calendar
               </Text>
-              {/* Metadata wraps to multiple lines on narrow screens. */}
-              <HStack gap={1} vAlign="center" wrap="wrap">
-                <HStack gap={1} vAlign="center">
-                  <Icon icon={CalendarDaysIcon} size="sm" color="secondary" />
-                  <Text type="body">Knights: 1st &amp; 3rd Mondays</Text>
-                </HStack>
-                <HStack gap={1} vAlign="center">
-                  <Bullet />
-                  <Text type="body">Ladies Auxiliary: 4th Monday</Text>
-                </HStack>
-                <HStack gap={1} vAlign="center">
-                  <Bullet />
-                  <Badge variant="warning" label="Confirm by email" />
-                </HStack>
-              </HStack>
+              {/* The schedule is explained once, in Meeting rhythm below. */}
             </VStack>
           </StackItem>
           {!isNarrow && <HStack gap={2}>{actions}</HStack>}
@@ -168,14 +146,9 @@ function UpcomingSection() {
               padding={3}>
               <HStack gap={3} vAlign="center" wrap="wrap">
                 <StackItem size="fill">
-                  <VStack gap={0}>
-                    <Text type="body" weight="bold">
-                      {formatLong(m.date)}
-                    </Text>
-                    <Text type="supporting" color="secondary">
-                      {`${ordinal(m.nth)} Monday of the month`}
-                    </Text>
-                  </VStack>
+                  <Text type="body" weight="bold">
+                    {formatLong(m.date)}
+                  </Text>
                 </StackItem>
                 <Badge
                   variant={m.group === 'Knights' ? 'blue' : 'yellow'}
@@ -185,9 +158,6 @@ function UpcomingSection() {
             </Card>
           ))}
         </VStack>
-        <Text type="supporting" color="secondary">
-          Dates follow the regular monthly rhythm. {meetingsNote}
-        </Text>
       </VStack>
     </Section>
   );
