@@ -61,7 +61,7 @@ export default function ContactPage({current}: PageProps) {
   const handleSubmit = (e: FormEvent<HTMLElement>) => {
     const form = e.currentTarget as HTMLFormElement;
     form.method = 'POST';
-    form.action = '#'; // preview only: live site uses Google Forms
+    form.action = '#'; // preview only: the main site build uses Google Forms
     form.noValidate = true;
     setSubmitted(true);
     if (

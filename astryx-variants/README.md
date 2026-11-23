@@ -8,8 +8,8 @@ Hosted free on GitHub Pages.
 | What | File |
 |---|---|
 | All wording (meetings, officers, contacts, copy) | `src/shared/content.ts` |
-| Live site pages | `src/site/` |
-| Design previews (Variants 1 and 3, local only) | `src/preview/`, open `/preview.html` |
+| Main site build pages (currently the Community design) | `src/site/` |
+| All three variants side by side (local only) | `src/preview/`, open `/preview.html` |
 | Official KofC logo, emblem, McGivney portrait | `public/kofc-official/` |
 | Old URLs (`join.html` etc.) redirecting to new pages | `public/*.html` |
 
@@ -20,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:5173 (live site) or http://localhost:5173/preview.html (all three variants).
+Then open http://localhost:5173 (main site build) or http://localhost:5173/preview.html (all three variants).
 
 ## Publish
 

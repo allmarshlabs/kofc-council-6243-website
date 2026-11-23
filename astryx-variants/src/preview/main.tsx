@@ -24,14 +24,14 @@ import { v3 } from './v3';
 
 const variants = {
   v1: { label: '1 · Heritage', def: v1, theme: gothicTheme },
-  v2: { label: '2 · Community (live)', def: site, theme: themes.butter },
+  v2: { label: '2 · Community', def: site, theme: themes.butter },
   v3: { label: '3 · Bulletin', def: v3, theme: stoneTheme },
 } as const;
 type VKey = keyof typeof variants;
 const pageKeys: PageKey[] = ['home', 'calendar', 'join', 'gallery', 'contact'];
 
-// #/v1/join, #/v3/home … ; unprefixed links (#/join) come from the live
-// Variant 2 code, so they stay on Variant 2.
+// #/v1/join, #/v3/home … ; unprefixed links (#/join) come from the
+// Variant 2 code (the main index.html build), so they stay on Variant 2.
 function parse(): { v: VKey; page: PageKey } {
   const parts = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
   const v = (parts[0] in variants ? parts[0] : 'v2') as VKey;
@@ -75,7 +75,7 @@ function Preview() {
       <Theme theme={current.theme} mode={current.def.mode}>
         <Page navigate={navigate} current={route.page} />
       </Theme>
-      {/* Variant switcher, always in the neutral live theme */}
+      {/* Variant switcher, always in the same (Butter) theme */}
       <Theme theme={themes.butter} mode="light">
         <Card padding={2} xstyle={styles.bar}>
           <HStack gap={1} wrap="wrap" vAlign="center">
