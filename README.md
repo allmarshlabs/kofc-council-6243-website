@@ -12,7 +12,7 @@ built with Meta's [Astryx](https://astryx.atmeta.com/) design system.
 You need [Node.js](https://nodejs.org/) 20 or newer (the LTS download is fine).
 
 ```bash
-git clone https://github.com/pmarsh41/kofc-council-6243-website.git
+git clone https://github.com/allmarshlabs/kofc-council-6243-website.git
 cd kofc-council-6243-website/astryx-variants
 npm install
 npm run dev
