@@ -12,6 +12,7 @@ import { Section } from '@astryxdesign/core/Section';
 import { Grid } from '@astryxdesign/core/Grid';
 import { Card } from '@astryxdesign/core/Card';
 import { Badge } from '@astryxdesign/core/Badge';
+import { useMediaQuery } from '@astryxdesign/core/hooks';
 import { Banner } from '@astryxdesign/core/Banner';
 import { Token } from '@astryxdesign/core/Token';
 import { Link } from '@astryxdesign/core/Link';
@@ -87,6 +88,9 @@ function SectionHeading({ title, blurb }: { title: string; blurb?: string }) {
 }
 
 export default function Home({ current }: PageProps) {
+  // On phones the headline breaks into two clean lines instead of wrapping
+  // mid-phrase around the separator dot.
+  const isPhone = useMediaQuery('(max-width: 640px)', false);
   const knights = nextOf('knights');
   const auxiliary = nextOf('auxiliary');
   // Soonest meeting first.
@@ -105,9 +109,18 @@ export default function Home({ current }: PageProps) {
               {/* Hero */}
               <VStack gap={6} hAlign="center">
                 <VStack gap={3} hAlign="center">
-                  <Badge variant="yellow" label={`Knights of Columbus · Council ${council.number}`} />
+                  {/* The council leads; the parish name is the small label. */}
+                  <Badge variant="yellow" label={council.name} />
                   <Heading level={1} type="display-2" justify="center" textWrap="balance">
-                    {council.name}
+                    {isPhone ? (
+                      <>
+                        Knights of Columbus
+                        <br />
+                        {`Council ${council.number}`}
+                      </>
+                    ) : (
+                      `Knights of Columbus · Council ${council.number}`
+                    )}
                   </Heading>
                   <Text type="body" color="secondary" justify="center" textWrap="balance">
                     {council.intro}
