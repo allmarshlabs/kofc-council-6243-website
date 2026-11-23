@@ -145,10 +145,14 @@ export default function Home({current}: PageProps) {
                 <VStack gap={6} vAlign="center">
                   <VStack gap={3}>
                     <Text type="supporting" color="secondary" weight="semibold">
-                      {`KNIGHTS OF COLUMBUS COUNCIL ${council.number} · ${council.location.toUpperCase()}`}
+                      {`${council.name.toUpperCase()} · ${council.location.toUpperCase()}`}
                     </Text>
+                    {/* The council leads; the parish name is the small label above.
+                        Two lines: the half-width column is too narrow for one. */}
                     <Text type="display-1" as="h1">
-                      {council.name}
+                      Knights of Columbus
+                      <br />
+                      {`Council\u00A0${council.number}`}
                     </Text>
                     <Text type="large" color="secondary">
                       {council.intro}

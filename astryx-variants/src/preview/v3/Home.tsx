@@ -128,11 +128,16 @@ export default function Home({ current }: PageProps) {
                 <HStack gap={8} vAlign="center">
                   <StackItem size="fill">
                     <VStack gap={4}>
+                      {/* The council leads; the parish name is the small label. */}
                       <Text type="label" color="secondary">
-                        Council {council.number} · {council.location}
+                        {council.name} · {council.location}
                       </Text>
-                      <Text as="h1" type="display-1">
-                        {council.name}
+                      {/* Two lines at every size so "Council 6243" never strands; one
+                          display step smaller on phones so it fits. */}
+                      <Text as="h1" type={isNarrow ? 'display-2' : 'display-1'}>
+                        Knights of Columbus
+                        <br />
+                        {`Council\u00A0${council.number}`}
                       </Text>
                       <Text type="large" weight="normal" color="secondary">
                         {council.intro}

@@ -116,10 +116,10 @@ export default function Home({ current }: PageProps) {
                       <>
                         Knights of Columbus
                         <br />
-                        {`Council ${council.number}`}
+                        {`Council\u00A0${council.number}`}
                       </>
                     ) : (
-                      `Knights of Columbus · Council ${council.number}`
+                      `Knights of Columbus · Council\u00A0${council.number}`
                     )}
                   </Heading>
                   <Text type="body" color="secondary" justify="center" textWrap="balance">
