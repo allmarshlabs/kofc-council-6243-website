@@ -1,0 +1,297 @@
+// Home — adapted from the Astryx `side-gallery` page template.
+// Kept: Layout/LayoutContent frame, the 2-up fit Grid (minWidth 360, gap 8),
+// the copy column (eyebrow, h1, body, CTA row, divider + stat blocks) and the
+// 3-column image collage. Replaced: copy, stats and images with council
+// content; added principle / meeting / pillar / founder sections below in the
+// same Grid + VStack rhythm.
+
+import * as stylex from '@stylexjs/stylex';
+import {VStack, HStack, Layout, LayoutContent} from '@astryxdesign/core/Layout';
+import {Text, Heading} from '@astryxdesign/core/Text';
+import {Button} from '@astryxdesign/core/Button';
+import {AspectRatio} from '@astryxdesign/core/AspectRatio';
+import {Grid} from '@astryxdesign/core/Grid';
+import {Divider} from '@astryxdesign/core/Divider';
+import {Section} from '@astryxdesign/core/Section';
+import {Card} from '@astryxdesign/core/Card';
+import {Icon} from '@astryxdesign/core/Icon';
+import {Link} from '@astryxdesign/core/Link';
+import {
+  CalendarDaysIcon,
+  ArrowRightIcon,
+  EnvelopeIcon,
+} from '@heroicons/react/24/outline';
+import type {PageProps} from '../../App';
+import {
+  assets,
+  council,
+  founder,
+  meetings,
+  meetingsNote,
+  pillars,
+  principles,
+} from '../../shared/content';
+import {Shell, href} from './Shell';
+import {upcomingMeetings, formatShort} from './schedule';
+
+const styles = stylex.create({
+  tile: {
+    borderRadius: 'var(--radius-element)',
+    overflow: 'hidden',
+  },
+  // Portrait sits on the right of the 16:9 painting: crop toward him.
+  mcgivneyCrop: {objectPosition: '80% 30%'},
+  // Official emblem (reverse version, for the dark ground) as the hero seal.
+  emblemTile: {backgroundColor: 'var(--color-background-card)'},
+  emblem: {padding: 'var(--spacing-12)'},
+});
+
+// ─── Stat Block ─────────────────────────────────────────────────────────────
+
+function StatBlock({value, label}: {value: string; label: string}) {
+  return (
+    <VStack gap={0}>
+      <Text type="large" weight="bold">
+        {value}
+      </Text>
+      <Text type="supporting" color="secondary">
+        {label}
+      </Text>
+    </VStack>
+  );
+}
+
+// ─── Hero Image ─────────────────────────────────────────────────────────────
+// One image in the template's gallery slot: the official KofC emblem, which
+// stands for the organization. (The McGivney portrait is in the founder section.)
+
+function HeroImage() {
+  return (
+    <AspectRatio ratio={1} fit="contain" xstyle={[styles.tile, styles.emblemTile]}>
+      <img
+        src={assets.emblemReverse}
+        alt="Knights of Columbus emblem"
+        {...stylex.props(styles.emblem)}
+      />
+    </AspectRatio>
+  );
+}
+
+function SectionHeader({
+  eyebrow,
+  title,
+  body,
+}: {
+  eyebrow: string;
+  title: string;
+  body?: string;
+}) {
+  return (
+    <VStack gap={2}>
+      <Text type="supporting" color="secondary" weight="semibold">
+        {eyebrow.toUpperCase()}
+      </Text>
+      <Text type="display-3" as="h2">
+        {title}
+      </Text>
+      {body && (
+        <Text type="body" color="secondary">
+          {body}
+        </Text>
+      )}
+    </VStack>
+  );
+}
+
+const NUMERALS = ['I', 'II', 'III', 'IV'];
+
+// ─── Main Page ──────────────────────────────────────────────────────────────
+
+export default function Home({current}: PageProps) {
+  const next = upcomingMeetings(1)[0];
+  return (
+    <Shell current={current}>
+      <Layout
+        height="auto"
+        contentWidth={1400}
+        content={
+          <LayoutContent padding={6} isScrollable={false}>
+            <VStack gap={10}>
+              <Grid
+                columns={{minWidth: 360, max: 2, repeat: 'fit'}}
+                gap={8}
+                align="center">
+                {/* Left side: Text + CTA */}
+                <VStack gap={6} vAlign="center">
+                  <VStack gap={3}>
+                    <Text type="supporting" color="secondary" weight="semibold">
+                      {`KNIGHTS OF COLUMBUS COUNCIL ${council.number} · ${council.location.toUpperCase()}`}
+                    </Text>
+                    <Text type="display-1" as="h1">
+                      {council.name}
+                    </Text>
+                    <Text type="large" color="secondary">
+                      {council.intro}
+                    </Text>
+                  </VStack>
+
+                  <HStack gap={3} vAlign="center" wrap="wrap">
+                    <Button
+                      label="Council calendar"
+                      variant="primary"
+                      size="lg"
+                      href={href('calendar')}
+                      icon={<Icon icon={CalendarDaysIcon} />}
+                    />
+                    <Button
+                      label="Become a Knight"
+                      size="lg"
+                      href={href('join')}
+                    />
+                  </HStack>
+
+                  <VStack gap={4}>
+                    <Divider />
+                    <HStack gap={6} wrap="wrap">
+                      <StatBlock value={council.number} label="Council number" />
+                      <StatBlock value="1882" label="Order founded" />
+                      <StatBlock
+                        value={next ? formatShort(next.date) : '—'}
+                        label={next ? `Next ${next.group} meeting` : 'Next meeting'}
+                      />
+                    </HStack>
+                  </VStack>
+                </VStack>
+
+                {/* Right side: the KofC emblem as the single hero image */}
+                <HeroImage />
+              </Grid>
+
+              {/* Principles */}
+              <Section
+                paddingBlock={8}
+                paddingInline={6}
+                dividers={['top', 'bottom']}
+                variant="transparent">
+                <VStack gap={6}>
+                  <SectionHeader
+                    eyebrow="Since 1882"
+                    title="Our principles"
+                  />
+                  <Grid columns={{minWidth: 150, repeat: 'fit'}} gap={6}>
+                    {principles.map((p, i) => (
+                      <VStack key={p} gap={1}>
+                        <Text type="supporting" color="secondary" weight="semibold">
+                          {NUMERALS[i]}
+                        </Text>
+                        <Text type="display-3" as="h3" color="accent">
+                          {p}
+                        </Text>
+                      </VStack>
+                    ))}
+                  </Grid>
+                  <Text type="large" color="secondary">
+                    {council.givingNote}
+                  </Text>
+                </VStack>
+              </Section>
+
+              {/* Meetings */}
+              <Grid
+                columns={{minWidth: 360, max: 2, repeat: 'fit'}}
+                gap={8}
+                align="center">
+                <VStack gap={4}>
+                  <SectionHeader
+                    eyebrow="Meetings"
+                    title="Gather with us on Monday evenings"
+                    body={meetingsNote}
+                  />
+                  <HStack gap={3} wrap="wrap">
+                    <Button
+                      label="See upcoming dates"
+                      variant="primary"
+                      href={href('calendar')}
+                      icon={<Icon icon={ArrowRightIcon} />}
+                    />
+                    <Button
+                      label="Email the council"
+                      variant="ghost"
+                      href={`mailto:${council.email}`}
+                      icon={<Icon icon={EnvelopeIcon} />}
+                    />
+                  </HStack>
+                </VStack>
+                <VStack gap={3}>
+                  {meetings.map(m => (
+                    <Card key={m.title} padding={5}>
+                      <HStack gap={4} vAlign="center">
+                        <Icon icon={CalendarDaysIcon} size="lg" color="accent" />
+                        <VStack gap={1}>
+                          <Heading level={3}>{m.title}</Heading>
+                          <Text type="body" color="secondary">
+                            {m.when}
+                          </Text>
+                        </VStack>
+                      </HStack>
+                    </Card>
+                  ))}
+                </VStack>
+              </Grid>
+
+              {/* Pillars */}
+              <VStack gap={6}>
+                <SectionHeader
+                  eyebrow="What we do"
+                  title="Faith, community, family and life"
+                />
+                <Grid columns={{minWidth: 240, repeat: 'fit'}} gap={4}>
+                  {pillars.map(p => (
+                    <Card key={p.title} padding={5}>
+                      <VStack gap={2}>
+                        <Heading level={3}>{p.title}</Heading>
+                        <Text type="body" color="secondary">
+                          {p.body}
+                        </Text>
+                      </VStack>
+                    </Card>
+                  ))}
+                </Grid>
+              </VStack>
+
+              {/* Founder */}
+              <Section variant="muted" padding={0}>
+                <Grid
+                  columns={{minWidth: 360, max: 2, repeat: 'fit'}}
+                  gap={0}
+                  align="stretch">
+                  <AspectRatio ratio={4 / 3} fit="cover">
+                    <img
+                      src={assets.mcgivney}
+                      alt={assets.mcgivneyAlt}
+                      {...stylex.props(styles.mcgivneyCrop)}
+                    />
+                  </AspectRatio>
+                  <VStack gap={4} padding={8} vAlign="center">
+                    <Text type="supporting" color="secondary" weight="semibold">
+                      OUR FOUNDER
+                    </Text>
+                    <Text type="display-2" as="h2">
+                      {founder.name}
+                    </Text>
+                    <Text type="large" color="secondary">
+                      {founder.blurb}
+                    </Text>
+                    <Link href={founder.url} isExternalLink weight="semibold">
+                      Read about our founder on kofc.org
+                    </Link>
+                  </VStack>
+                </Grid>
+              </Section>
+            </VStack>
+          </LayoutContent>
+        }
+      />
+    </Shell>
+  );
+}

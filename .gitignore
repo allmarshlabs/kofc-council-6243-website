@@ -1,0 +1,6 @@
+node_modules/
+astryx-variants/dist/
+# Page renders used for the Figma file (regenerate with scripts/capture.mjs)
+astryx-variants/captures/
+.playwright-mcp/
+.DS_Store
