@@ -89,10 +89,11 @@ function SectionHeading({ title, blurb }: { title: string; blurb?: string }) {
 export default function Home({ current }: PageProps) {
   const knights = nextOf('knights');
   const auxiliary = nextOf('auxiliary');
+  // Soonest meeting first.
   const nextMeetings = [
     { meeting: meetings[0], next: knights, color: 'blue' as const },
     { meeting: meetings[1], next: auxiliary, color: 'yellow' as const },
-  ];
+  ].sort((a, b) => a.next.date.getTime() - b.next.date.getTime());
 
   return (
     <Shell current={current}>

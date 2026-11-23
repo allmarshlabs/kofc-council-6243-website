@@ -114,15 +114,21 @@ const NUMERALS = ['I', 'II', 'III', 'IV'];
 // ─── Main Page ──────────────────────────────────────────────────────────────
 
 export default function Home({current}: PageProps) {
-  // Next date for each group, from the meeting rhythm in content.ts.
+  // The next meeting for each group (from the meeting rhythm in content.ts),
+  // shown soonest first.
   const upcoming = upcomingMeetings(6);
-  const nextFor = (group: 'Knights' | 'Ladies Auxiliary') => {
-    const m = upcoming.find(u => u.group === group);
-    if (!m) return '—';
-    const today = new Date();
-    const isToday = m.date.toDateString() === today.toDateString();
-    return isToday ? `Today, ${formatMonthDay(m.date)}` : formatShort(m.date);
-  };
+  const todayLabel = new Date().toDateString();
+  const nextMeetings = (['Knights', 'Ladies Auxiliary'] as const)
+    .map(group => upcoming.find(u => u.group === group))
+    .filter(m => m !== undefined)
+    .sort((a, b) => a.date.getTime() - b.date.getTime())
+    .map(m => ({
+      group: m.group,
+      value:
+        m.date.toDateString() === todayLabel
+          ? `Today, ${formatMonthDay(m.date)}`
+          : formatShort(m.date),
+    }));
   return (
     <Shell current={current}>
       <Layout
@@ -175,8 +181,9 @@ export default function Home({current}: PageProps) {
                       </Link>
                     </HStack>
                     <HStack gap={8} wrap="wrap">
-                      <NextMeeting group="Knights" value={nextFor('Knights')} />
-                      <NextMeeting group="Ladies Auxiliary" value={nextFor('Ladies Auxiliary')} />
+                      {nextMeetings.map(m => (
+                        <NextMeeting key={m.group} group={m.group} value={m.value} />
+                      ))}
                     </HStack>
                   </VStack>
                 </VStack>
