@@ -107,10 +107,13 @@ export default function ContactPage({current}: PageProps) {
                   <HStack gap={2} vAlign="start">
                     <Icon icon={MapPinIcon} size="sm" color="accent" />
                     <VStack gap={0}>
-                      <Text type="label">{council.parishName}</Text>
+                      <Text type="label">{council.hallName}</Text>
                       <Text type="body" color="secondary">
                         {council.address}
                       </Text>
+                      <Link href={council.directionsUrl} isExternalLink>
+                        Get directions
+                      </Link>
                       <Link href={council.parishUrl} isExternalLink>
                         Visit our parish
                       </Link>

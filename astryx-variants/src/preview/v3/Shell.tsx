@@ -122,10 +122,13 @@ export function Shell({ current, children }: { current: PageKey; children: React
                   </VStack>
                 </VStack>
                 <VStack gap={1}>
-                  <Text type="label">{council.parishName}</Text>
+                  <Text type="label">{council.hallName}</Text>
                   <Text type="supporting" color="secondary">
                     {council.address}
                   </Text>
+                  <Link href={council.directionsUrl} isExternalLink type="supporting">
+                    Get directions
+                  </Link>
                   <Link href={council.parishUrl} isExternalLink type="supporting">
                     Visit our parish
                   </Link>

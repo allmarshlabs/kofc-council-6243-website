@@ -109,7 +109,7 @@ export default function Contact({ current }: PageProps) {
                     </MetadataListItem>
                     <MetadataListItem label="Address" icon={<Icon icon={MapPinIcon} size="sm" />}>
                       <VStack gap={0.5}>
-                        <Text type="body">{council.parishName}</Text>
+                        <Text type="body">{council.hallName}</Text>
                         <Text type="body" color="secondary">
                           {council.address}
                         </Text>

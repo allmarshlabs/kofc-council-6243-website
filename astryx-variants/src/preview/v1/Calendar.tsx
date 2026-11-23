@@ -197,7 +197,7 @@ function PanelContent({sectionLevel = 2}: {sectionLevel?: 2 | 3}) {
         Where we meet
       </Heading>
       <MetadataList label={{position: 'top'}}>
-        <MetadataListItem label="Parish">{council.parishName}</MetadataListItem>
+        <MetadataListItem label="Hall">{council.hallName}</MetadataListItem>
         <MetadataListItem
           label="Address"
           icon={<Icon icon={MapPinIcon} size="sm" />}>
@@ -207,6 +207,9 @@ function PanelContent({sectionLevel = 2}: {sectionLevel?: 2 | 3}) {
           <Link href={mailto}>{council.email}</Link>
         </MetadataListItem>
       </MetadataList>
+      <Link href={council.directionsUrl} isExternalLink>
+        Get directions
+      </Link>
       <Link href={council.parishUrl} isExternalLink>
         Visit our parish
       </Link>

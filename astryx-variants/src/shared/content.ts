@@ -24,7 +24,12 @@ export const council = {
   number: '6243',
   fullName: 'Knights of Columbus Council 6243',
   location: 'Williamsburg, Brooklyn',
-  address: '275 North 8th Street, Brooklyn, NY 11211',
+  // Where the council meets: its own hall, not the church.
+  hallName: 'Sonny Mangone Hall',
+  address: '16 Havemeyer Street, Brooklyn, NY 11211',
+  directionsUrl: 'https://www.google.com/maps/search/?api=1&query=16+Havemeyer+St+Brooklyn+NY+11211',
+  // The parish the council serves (kept for the "Visit our parish" link).
+  parishAddress: '275 North 8th Street, Brooklyn, NY 11211',
   email: 'OLMC6243@gmail.com',
   parishUrl: 'https://mountcarmel-annunciation.com/',
   parishName: 'Shrine Church of Our Lady of Mount Carmel',

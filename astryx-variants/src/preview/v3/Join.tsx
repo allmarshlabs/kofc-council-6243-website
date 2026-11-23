@@ -230,7 +230,7 @@ export default function Join({ current }: PageProps) {
                         {meetings[0].when}
                       </MetadataListItem>
                       <MetadataListItem label="Where" icon={<Icon icon={MapPinIcon} size="sm" />}>
-                        {council.parishName}, {council.address}
+                        {council.hallName}, {council.address}
                       </MetadataListItem>
                     </MetadataList>
                     <Divider />

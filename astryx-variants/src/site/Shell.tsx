@@ -147,7 +147,7 @@ function Footer() {
           </VStack>
           <VStack gap={2}>
             <Text type="label" weight="semibold">
-              {council.parishName}
+              {council.hallName}
             </Text>
             <HStack gap={2} vAlign="start">
               <Icon icon={MapPinIcon} size="sm" color="secondary" />
@@ -155,6 +155,9 @@ function Footer() {
                 {council.address}
               </Text>
             </HStack>
+            <Link href={council.directionsUrl} isExternalLink type="supporting">
+              Get directions
+            </Link>
             <Link href={council.parishUrl} isExternalLink type="supporting">
               Visit our parish
             </Link>

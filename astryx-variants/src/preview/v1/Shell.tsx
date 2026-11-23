@@ -134,10 +134,13 @@ function SiteFooter({isPhone}: {isPhone: boolean}) {
             </Text>
           </VStack>
           <VStack gap={1}>
-            <Text type="label">{council.parishName}</Text>
+            <Text type="label">{council.hallName}</Text>
             <Text type="supporting" color="secondary">
               {council.address}
             </Text>
+            <Link href={council.directionsUrl} isExternalLink type="supporting">
+              Get directions
+            </Link>
             <Link href={council.parishUrl} isExternalLink type="supporting">
               Visit our parish
             </Link>
