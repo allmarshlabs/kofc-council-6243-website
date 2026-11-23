@@ -32,7 +32,7 @@ import {
   principles,
 } from '../../shared/content';
 import {Shell, href} from './Shell';
-import {upcomingMeetings, formatShort} from './schedule';
+import {upcomingMeetings, formatShort, formatMonthDay} from './schedule';
 
 const styles = stylex.create({
   tile: {
@@ -42,20 +42,26 @@ const styles = stylex.create({
   // Portrait sits on the right of the 16:9 painting: crop toward him.
   mcgivneyCrop: {objectPosition: '80% 30%'},
   // Official emblem (reverse version, for the dark ground) as the hero seal.
-  emblemTile: {backgroundColor: 'var(--color-background-card)'},
-  emblem: {padding: 'var(--spacing-12)'},
+  emblem: {padding: {default: 'var(--spacing-12)', '@media (max-width: 768px)': 'var(--spacing-2)'}},
+  // On phones the full-width square leaves a lot of empty space; cap it.
+  heroEmblem: {
+    width: '100%',
+    maxWidth: {default: 'none', '@media (max-width: 768px)': 240},
+    marginInline: 'auto',
+  },
 });
 
 // ─── Stat Block ─────────────────────────────────────────────────────────────
 
-function StatBlock({value, label}: {value: string; label: string}) {
+// One labelled entry in the hero's "Next meetings" row: group, then date.
+function NextMeeting({group, value}: {group: string; value: string}) {
   return (
     <VStack gap={0}>
+      <Text type="supporting" color="secondary">
+        {group}
+      </Text>
       <Text type="large" weight="bold">
         {value}
-      </Text>
-      <Text type="supporting" color="secondary">
-        {label}
       </Text>
     </VStack>
   );
@@ -67,7 +73,7 @@ function StatBlock({value, label}: {value: string; label: string}) {
 
 function HeroImage() {
   return (
-    <AspectRatio ratio={1} fit="contain" xstyle={[styles.tile, styles.emblemTile]}>
+    <AspectRatio ratio={1} fit="contain" xstyle={styles.heroEmblem}>
       <img
         src={assets.emblemReverse}
         alt="Knights of Columbus emblem"
@@ -108,7 +114,15 @@ const NUMERALS = ['I', 'II', 'III', 'IV'];
 // ─── Main Page ──────────────────────────────────────────────────────────────
 
 export default function Home({current}: PageProps) {
-  const next = upcomingMeetings(1)[0];
+  // Next date for each group, from the meeting rhythm in content.ts.
+  const upcoming = upcomingMeetings(6);
+  const nextFor = (group: 'Knights' | 'Ladies Auxiliary') => {
+    const m = upcoming.find(u => u.group === group);
+    if (!m) return '—';
+    const today = new Date();
+    const isToday = m.date.toDateString() === today.toDateString();
+    return isToday ? `Today, ${formatMonthDay(m.date)}` : formatShort(m.date);
+  };
   return (
     <Shell current={current}>
       <Layout
@@ -152,13 +166,17 @@ export default function Home({current}: PageProps) {
 
                   <VStack gap={4}>
                     <Divider />
-                    <HStack gap={6} wrap="wrap">
-                      <StatBlock value={council.number} label="Council number" />
-                      <StatBlock value="1882" label="Order founded" />
-                      <StatBlock
-                        value={next ? formatShort(next.date) : '—'}
-                        label={next ? `Next ${next.group} meeting` : 'Next meeting'}
-                      />
+                    <HStack gap={4} hAlign="between" vAlign="center">
+                      <Text type="supporting" color="secondary" weight="semibold">
+                        NEXT MEETINGS
+                      </Text>
+                      <Link href={href('calendar')} type="supporting" weight="semibold">
+                        Full calendar
+                      </Link>
+                    </HStack>
+                    <HStack gap={8} wrap="wrap">
+                      <NextMeeting group="Knights" value={nextFor('Knights')} />
+                      <NextMeeting group="Ladies Auxiliary" value={nextFor('Ladies Auxiliary')} />
                     </HStack>
                   </VStack>
                 </VStack>

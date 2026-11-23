@@ -34,3 +34,6 @@ export const formatLong = (d: Date) =>
 
 export const formatShort = (d: Date) =>
   d.toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric'});
+
+export const formatMonthDay = (d: Date) =>
+  d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'});
