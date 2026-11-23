@@ -107,19 +107,18 @@ export function Shell({ current, children }: { current: PageKey; children: React
         <Section variant="muted" dividers={['top']} padding={8}>
           <Center axis="horizontal">
             <VStack gap={6} width="100%" maxWidth={1200}>
-              <Grid columns={{ minWidth: 240 }} gap={6}>
+              <Grid columns={{ minWidth: 240, max: 3, repeat: 'fit' }} gap={6}>
+                {/* Logo + one quiet line, so the logo's top lines up with the
+                    headings of the other columns (as in the other variants). */}
                 <VStack gap={3}>
                   <img
                     src={assets.logoHorizontalTrim}
                     alt="Knights of Columbus"
                     {...stylex.props(styles.footerLogo)}
                   />
-                  <VStack gap={1}>
-                    <Text type="label">{council.fullName}</Text>
-                    <Text type="supporting" color="secondary">
-                      {council.name} · {council.location}
-                    </Text>
-                  </VStack>
+                  <Text type="supporting" color="secondary">
+                    {council.name} Council {council.number} · {council.location}
+                  </Text>
                 </VStack>
                 <VStack gap={1}>
                   <Text type="label">{council.hallName}</Text>
@@ -140,10 +139,6 @@ export function Shell({ current, children }: { current: PageKey; children: React
                   </Link>
                 </VStack>
               </Grid>
-              <Divider />
-              <Text type="supporting" color="secondary">
-                {council.fullName} · {council.name} · {council.location}
-              </Text>
             </VStack>
           </Center>
         </Section>
