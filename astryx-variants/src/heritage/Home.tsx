@@ -54,9 +54,9 @@ const styles = stylex.create({
   // name (Stack has no baseline option), and a fixed numeral column keeps
   // the names and their captions on one left edge across all four degrees.
   degreeRow: {alignItems: 'baseline', columnGap: 'var(--spacing-3)'},
-  // Right-aligned in a column as wide as "III", so each numeral sits snug
-  // against its name and the four names still share one left edge.
-  numeral: {minWidth: '1.6em', textAlign: 'end'},
+  // Blackletter numeral in a fixed column as wide as "iii": numerals share the
+  // section's left edge and the four names share theirs.
+  numeral: {minWidth: '0.8em'},
   // Comfortable reading measure for the intro paragraph.
   measure: {maxWidth: 680},
 });
@@ -121,12 +121,14 @@ function SectionHeader({
   );
 }
 
-// Each principle is one of the Order's degrees, in order.
+// Each principle is one of the Order's degrees, in order. Numerals are
+// lowercase, as in manuscripts: in blackletter the capitals I and V read as
+// J and U, while i, ii, iii, iv stay legible.
 const DEGREES = [
-  {numeral: 'I', name: 'First Degree'},
-  {numeral: 'II', name: 'Second Degree'},
-  {numeral: 'III', name: 'Third Degree'},
-  {numeral: 'IV', name: 'Fourth Degree'},
+  {numeral: 'i', name: 'First Degree'},
+  {numeral: 'ii', name: 'Second Degree'},
+  {numeral: 'iii', name: 'Third Degree'},
+  {numeral: 'iv', name: 'Fourth Degree'},
 ];
 
 // ─── Main Page ──────────────────────────────────────────────────────────────
@@ -238,9 +240,10 @@ export default function Home({current}: PageProps) {
                     rowGap={isPhone ? 5 : 8}>
                     {principles.map((p, i) => (
                       <HStack key={p} gap={0} xstyle={styles.degreeRow}>
+                        {/* Same blackletter as the name (display-3), in the
+                            secondary colour so it reads as the degree number. */}
                         <Text
-                          type="large"
-                          weight="semibold"
+                          type="display-3"
                           color="secondary"
                           aria-hidden
                           xstyle={styles.numeral}>
@@ -250,7 +253,7 @@ export default function Home({current}: PageProps) {
                           <Text type="display-3" as="h3" color="accent">
                             {p}
                           </Text>
-                          <Text type="supporting" color="secondary">
+                          <Text type="body" color="secondary">
                             {DEGREES[i].name}
                           </Text>
                         </VStack>
