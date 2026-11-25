@@ -4,11 +4,10 @@
 # deploys ignore a CNAME file). DNS steps are in astryx-variants/README.md.
 name: Deploy to GitHub Pages
 
-# Manual-only while the repo is private (GitHub Pages on private repos needs a
-# paid plan). When the repo goes public, add back:
-#   push:
-#     branches: [main]
+# Publishes on every push to main; can also be run by hand from the Actions tab.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

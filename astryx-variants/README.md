@@ -26,10 +26,13 @@ Then open http://localhost:5173 (the live site, Heritage White) or http://localh
 
 ## Publish
 
-`.github/workflows/pages.yml` builds and deploys the site. While the repo is private it runs only
-when started by hand (Actions tab → Deploy to GitHub Pages → Run workflow), because GitHub Pages on
-private repos needs a paid plan. When the repo goes public, re-enable the push trigger noted in
-the workflow. One-time: **Settings → Pages → Source: GitHub Actions**.
+`.github/workflows/pages.yml` builds and publishes the site on every push to `main` (about a
+minute later). To re-publish without a change: Actions tab → Deploy to GitHub Pages → Run workflow.
+The repo is public, which is what makes GitHub Pages free. Pages is set to **Source: GitHub
+Actions** (Settings → Pages).
+
+Until the custom domain is connected, the site is at
+https://allmarshlabs.github.io/kofc-council-6243-website/.
 
 **Custom domain: `olmcknights6243.org`.** No `CNAME` file is needed (GitHub ignores it when an
 Actions workflow deploys). Once the site is published:
