@@ -4,7 +4,8 @@ Redesign of the Council 6243 (Our Lady of Mount Carmel, Williamsburg, Brooklyn) 
 built with Meta's [Astryx](https://astryx.atmeta.com/) design system.
 
 - **`astryx-variants/`** — the new site, in four design variants: 1 "Heritage", 2 "Community",
-  3 "Bulletin" and 4 "Heritage White" (Heritage on a white background). No design has been chosen yet; the main build currently uses Community.
+  3 "Bulletin" and 4 "Heritage White" (Heritage on a white background). **The council chose Heritage White**;
+  it is the live site. The other three stay in the local preview for reference.
 - **Root `index.html`, `calendar.html`, … and `assets/`** — the old static site, kept for reference.
 
 ## Walk through the designs on your computer
@@ -22,7 +23,7 @@ Then open:
 
 - **http://localhost:5173/preview.html** — all four designs. Use the switcher bar at the bottom
   (1 · Heritage, 2 · Community, 3 · Bulletin, 4 · Heritage White); it keeps you on the same page as you switch.
-- **http://localhost:5173** — the main site build on its own (currently the Community design).
+- **http://localhost:5173** — the live site on its own (Heritage White), exactly as it will be published.
 
 Pages: Home, Calendar, Become a Knight, Gallery, Contact us. To see the phone layout, narrow the
 browser window or use your browser's device toolbar.

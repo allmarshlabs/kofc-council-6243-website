@@ -26,13 +26,13 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline';
-import type {PageProps} from '../../App';
+import type {PageProps} from '../App';
 import {
   contactForm,
   contacts,
   council,
   meetingsNote,
-} from '../../shared/content';
+} from '../shared/content';
 import {Shell} from './Shell';
 import {useMediaQuery} from '@astryxdesign/core/hooks';
 

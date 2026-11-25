@@ -1,7 +1,8 @@
 import type {ComponentType} from 'react';
-import type {PageProps, Site} from '../../App';
-import type {PageKey} from '../../shared/content';
-type Variant = Omit<Site, 'theme'> & {theme: string};
+import type {PageProps, Site} from '../App';
+import type {PageKey} from '../shared/content';
+/** A design definition; the preview may use themes the live site doesn't ship. */
+export type Variant = Omit<Site, 'theme'> & {theme: string};
 import Home from './Home';
 import Calendar from './Calendar';
 import Join from './Join';
@@ -32,7 +33,9 @@ function heritage(key: HeritageKey): Variant {
   return {theme: key === 'v1' ? 'gothic' : 'heritage-light', mode: HERITAGE_MODES[key], pages};
 }
 
-/** Variant 1 — Heritage, Gothic dark. */
+/** The live website (index.html): Heritage White, chosen by the council. */
+export const site: Site = {...heritage('site'), theme: 'heritage-light'};
+/** Variant 1 — Heritage, Gothic dark (preview only). */
 export const v1 = heritage('v1');
-/** Variant 4 — Heritage on white, Gothic light. */
+/** Variant 4 — Heritage White in the preview (same design as the live site). */
 export const v4 = heritage('v4');

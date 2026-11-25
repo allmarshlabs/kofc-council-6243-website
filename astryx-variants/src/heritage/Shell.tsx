@@ -1,4 +1,4 @@
-// Variant 1 shell — adapted from the Astryx `shell-top-nav` page template.
+// Heritage shell (live site, Variants 1 and 4) — adapted from the Astryx `shell-top-nav` page template.
 // Kept: AppShell + TopNav frame, contentPadding, centered capped content.
 // Removed: mega menus, search, sign-in and cart (nothing to shop or search).
 
@@ -14,7 +14,7 @@ import {Section} from '@astryxdesign/core/Section';
 import {Text} from '@astryxdesign/core/Text';
 import {Link} from '@astryxdesign/core/Link';
 import {Divider} from '@astryxdesign/core/Divider';
-import {council, navItems, type PageKey} from '../../shared/content';
+import {council, navItems, type PageKey} from '../shared/content';
 import {useHeritage} from './mode';
 
 const styles = stylex.create({

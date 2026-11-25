@@ -1,6 +1,6 @@
 # Knights of Columbus Council 6243 website
 
-Built with Meta's [Astryx](https://astryx.atmeta.com/) design system (React + StyleX), Butter theme.
+Built with Meta's [Astryx](https://astryx.atmeta.com/) design system (React + StyleX): the Heritage White design, theme `heritage-light`.
 Hosted free on GitHub Pages.
 
 ## Where things live
@@ -8,9 +8,10 @@ Hosted free on GitHub Pages.
 | What | File |
 |---|---|
 | All wording (meetings, officers, contacts, copy) | `src/shared/content.ts` |
-| Main site build pages (currently the Community design) | `src/site/` |
-| All four variants side by side (local only) | `src/preview/`, open `/preview.html` |
-| Variant 4 theme (Heritage on white), made with the Astryx theme editor | `themes/heritage-light/` (change it with `npx astryx experimental theme editor set heritage-light …`) |
+| Live site pages: the Heritage design (also Variants 1 and 4 in the preview) | `src/heritage/` |
+| Community design (Variant 2, preview only) | `src/community/` |
+| All four variants side by side (local only) | `src/preview/main.tsx` (Bulletin in `src/preview/v3/`), open `/preview.html` |
+| Live site theme `heritage-light` (Heritage White), made with the Astryx theme editor | `themes/heritage-light/` (change it with `npx astryx experimental theme editor set heritage-light …`) |
 | Official KofC logo, emblem, McGivney portrait | `public/kofc-official/` |
 | Old URLs (`join.html` etc.) redirecting to new pages | `public/*.html` |
 
@@ -21,7 +22,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:5173 (main site build) or http://localhost:5173/preview.html (all four variants).
+Then open http://localhost:5173 (the live site, Heritage White) or http://localhost:5173/preview.html (all four variants).
 
 ## Publish
 

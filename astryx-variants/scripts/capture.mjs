@@ -1,8 +1,9 @@
 // Full-page captures of design variants at desktop and mobile widths, for Figma.
 // Usage: node scripts/capture.mjs [baseUrl] [variant:page ...]
 //   e.g. node scripts/capture.mjs http://localhost:5173/ v2:home v1:contact
-// Needs the dev server running (npm run dev). Variants 1 and 3 live on
-// preview.html; Variant 2 (the live site) is index.html.
+// Needs the dev server running (npm run dev). All four variants are captured
+// from preview.html (Variant 2's links are unprefixed there: #/join). The live
+// site, index.html, is the Heritage White design (Variant 4).
 import { chromium } from 'playwright-core';
 import { mkdir } from 'node:fs/promises';
 
@@ -10,13 +11,13 @@ const base = process.argv[2] ?? 'http://localhost:5173/';
 const pages = ['home', 'calendar', 'join', 'gallery', 'contact'];
 const targets = process.argv.slice(3).length
   ? process.argv.slice(3).map((t) => t.split(':'))
-  : ['v1', 'v2', 'v3'].flatMap((v) => pages.map((p) => [v, p]));
+  : ['v1', 'v2', 'v3', 'v4'].flatMap((v) => pages.map((p) => [v, p]));
 const sizes = [
   { name: 'desktop', width: 1440, height: 900, scale: 1 },
   { name: 'mobile', width: 390, height: 844, scale: 2 },
 ];
 const urlFor = (v, p) =>
-  v === 'v2' ? `${base}#/${p}` : `${base}preview.html#/${v}/${p}`;
+  v === 'v2' ? `${base}preview.html#/${p}` : `${base}preview.html#/${v}/${p}`;
 
 await mkdir('captures', { recursive: true });
 const browser = await chromium.launch({ channel: 'chrome' });

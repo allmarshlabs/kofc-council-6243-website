@@ -2,7 +2,11 @@ import { useEffect, useState, type ComponentType } from 'react';
 import { Theme } from '@astryxdesign/core/theme';
 import { themes } from './astryx-themes';
 import type { PageKey } from './shared/content';
-import { site } from './site';
+// The live site: the Heritage White design the council chose.
+import { site } from './heritage';
+// Heritage's typefaces (Fustat, and Manufacturing Consent for display text)
+// are loaded by the Gothic theme package's font stylesheet.
+import '@astryxdesign/theme-gothic/fonts.css';
 
 // Hash routing (#/join) works on GitHub Pages with no server rewrites.
 export type NavigateFn = (page: PageKey) => void;

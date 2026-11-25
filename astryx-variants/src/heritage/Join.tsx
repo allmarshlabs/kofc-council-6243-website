@@ -38,7 +38,7 @@ import {
   EnvelopeIcon,
   HashtagIcon,
 } from '@heroicons/react/24/outline';
-import type {PageProps} from '../../App';
+import type {PageProps} from '../App';
 import {
   assets,
   council,
@@ -47,7 +47,7 @@ import {
   meetingsNote,
   pillars,
   principles,
-} from '../../shared/content';
+} from '../shared/content';
 import {Shell, useHeritage} from './Shell';
 
 // Custom CSS limited to what Astryx components can't express today:

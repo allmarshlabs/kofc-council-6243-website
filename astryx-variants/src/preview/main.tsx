@@ -1,6 +1,7 @@
 // Local-only preview of all four design variants (open /preview.html on the
 // dev server). Not part of the production build: vite build only bundles
-// index.html, so the Gothic/Stone themes and Variants 1, 3 & 4 never ship.
+// index.html, the live site, which is Variant 4's design (Heritage White).
+// Variants 1–3 and the Gothic, Butter and Stone themes never ship.
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import * as stylex from '@stylexjs/stylex';
@@ -21,15 +22,17 @@ import '@astryxdesign/theme-stone/fonts.css';
 import { heritageLightTheme } from '../themes/heritage-light/heritage-light.js';
 import '../themes/heritage-light/heritage-light.css';
 import '../index.css';
-import { themes } from '../astryx-themes';
+import { butterTheme } from '@astryxdesign/theme-butter/built';
+import '@astryxdesign/theme-butter/theme.css';
+import '@astryxdesign/theme-butter/fonts.css';
 import type { PageKey } from '../shared/content';
-import { site } from '../site';
-import { v1, v4 } from './v1';
+import { community } from '../community';
+import { v1, v4 } from '../heritage';
 import { v3 } from './v3';
 
 const variants = {
   v1: { label: '1 · Heritage', def: v1, theme: gothicTheme },
-  v2: { label: '2 · Community', def: site, theme: themes.butter },
+  v2: { label: '2 · Community', def: community, theme: butterTheme },
   v3: { label: '3 · Bulletin', def: v3, theme: stoneTheme },
   v4: { label: '4 · Heritage White', def: v4, theme: heritageLightTheme },
 } as const;
@@ -37,7 +40,8 @@ type VKey = keyof typeof variants;
 const pageKeys: PageKey[] = ['home', 'calendar', 'join', 'gallery', 'contact'];
 
 // #/v1/join, #/v3/home … ; unprefixed links (#/join) come from the
-// Variant 2 code (the main index.html build), so they stay on Variant 2.
+// Variant 2 code (written when Community was the main build), so they stay
+// on Variant 2.
 // Opening preview.html with no hash starts on Variant 1 (Heritage).
 function parse(): { v: VKey; page: PageKey } {
   const parts = window.location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
@@ -83,7 +87,7 @@ function Preview() {
         <Page navigate={navigate} current={route.page} />
       </Theme>
       {/* Variant switcher, always in the same (Butter) theme */}
-      <Theme theme={themes.butter} mode="light">
+      <Theme theme={butterTheme} mode="light">
         <Card padding={2} xstyle={styles.bar}>
           <HStack gap={1} wrap="wrap" vAlign="center">
             <Text type="supporting" color="secondary">

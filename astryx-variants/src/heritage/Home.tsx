@@ -21,7 +21,7 @@ import {
   ArrowRightIcon,
   EnvelopeIcon,
 } from '@heroicons/react/24/outline';
-import type {PageProps} from '../../App';
+import type {PageProps} from '../App';
 import {
   assets,
   council,
@@ -30,7 +30,7 @@ import {
   meetingsNote,
   pillars,
   principles,
-} from '../../shared/content';
+} from '../shared/content';
 import {Shell, useHeritage} from './Shell';
 import {upcomingMeetings, formatShort, formatMonthDay} from './schedule';
 

@@ -37,8 +37,8 @@ import {
   ArrowTopRightOnSquareIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline';
-import type {PageProps} from '../../App';
-import {council, meetings, meetingsNote} from '../../shared/content';
+import type {PageProps} from '../App';
+import {council, meetings, meetingsNote} from '../shared/content';
 import {Shell} from './Shell';
 import {upcomingMeetings, formatLong} from './schedule';
 
