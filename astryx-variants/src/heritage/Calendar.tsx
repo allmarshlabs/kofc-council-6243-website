@@ -34,7 +34,6 @@ import {AspectRatio} from '@astryxdesign/core/AspectRatio';
 import {
   CalendarDaysIcon,
   EnvelopeIcon,
-  ArrowTopRightOnSquareIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline';
 import type {PageProps} from '../App';
@@ -61,13 +60,6 @@ const mailto = `mailto:${council.email}?subject=${encodeURIComponent(
 function PageHeader({isNarrow}: {isNarrow: boolean}) {
   const actions = (
     <>
-      <Button
-        label="Open Google Calendar"
-        variant="primary"
-        href={calendarPage}
-        target="_blank"
-        icon={<Icon icon={ArrowTopRightOnSquareIcon} />}
-      />
       <Button
         label="Email to confirm"
         variant="secondary"
