@@ -155,8 +155,9 @@ function PanelContent({sectionLevel = 2}: {sectionLevel?: 2 | 3}) {
       <Heading level={4} accessibilityLevel={sectionLevel}>
         Where we meet
       </Heading>
+      {/* The hall's name already says "Hall"; no label needed. */}
+      <Text type="body">{council.hallName}</Text>
       <MetadataList label={{position: 'top'}}>
-        <MetadataListItem label="Hall">{council.hallName}</MetadataListItem>
         <MetadataListItem
           label="Address"
           icon={<Icon icon={MapPinIcon} size="sm" />}>
