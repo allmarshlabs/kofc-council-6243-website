@@ -46,7 +46,6 @@ const styles = stylex.create({
   iframe: {border: 0, width: '100%', height: '100%'},
 });
 
-const calendarPage = council.calendarEmbed.replace('/embed?', '/r?');
 const mailto = `mailto:${council.email}?subject=${encodeURIComponent(
   'Council 6243 meeting time',
 )}`;
@@ -127,14 +126,7 @@ function EmbedSection({isNarrow}: {isNarrow: boolean}) {
   return (
     <Section>
       <VStack gap={4}>
-        <HStack vAlign="center" gap={2} wrap="wrap">
-          <StackItem size="fill">
-            <Heading level={2}>Council Google Calendar</Heading>
-          </StackItem>
-          <Link href={calendarPage} isExternalLink>
-            Open in Google Calendar
-          </Link>
-        </HStack>
+        <Heading level={2}>Council Google Calendar</Heading>
         <AspectRatio ratio={isNarrow ? 3 / 4 : 4 / 3} xstyle={styles.frame}>
           <iframe
             src={council.calendarEmbed}
