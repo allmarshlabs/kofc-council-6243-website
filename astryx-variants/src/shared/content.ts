@@ -34,6 +34,8 @@ export const council = {
   parishUrl: 'https://mountcarmel-annunciation.com/',
   parishName: 'Shrine Church of Our Lady of Mount Carmel',
   joinUrl: 'https://www.kofc.org/joinus',
+  // The Order's own site, for visitors who want to learn more before joining.
+  orderUrl: 'https://www.kofc.org/',
   facebookUrl: 'https://www.facebook.com/groups/3240552622838782',
   calendarEmbed:
     'https://calendar.google.com/calendar/embed?src=olmc6243%40gmail.com&ctz=America%2FNew_York',

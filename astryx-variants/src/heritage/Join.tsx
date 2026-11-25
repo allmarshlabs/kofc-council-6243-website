@@ -37,6 +37,7 @@ import {
   UserGroupIcon,
   EnvelopeIcon,
   HashtagIcon,
+  ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline';
 import type {PageProps} from '../App';
 import {
@@ -147,6 +148,26 @@ function WhySection() {
             {principles.map(p => (
               <Badge key={p} label={p} />
             ))}
+          </HStack>
+        </VStack>
+        {/* Learn about the Order before joining; "Join online" stays the
+            primary action in the rail. */}
+        <Divider />
+        <VStack gap={3}>
+          <Text type="body" color="secondary">
+            Council {council.number} is one of thousands of local councils of the
+            Knights of Columbus. Learn about the Order, its history and its work
+            around the world.
+          </Text>
+          <HStack>
+            <Button
+              label="Visit kofc.org"
+              variant="secondary"
+              href={council.orderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              endContent={<Icon icon={ArrowTopRightOnSquareIcon} size="sm" />}
+            />
           </HStack>
         </VStack>
       </VStack>
