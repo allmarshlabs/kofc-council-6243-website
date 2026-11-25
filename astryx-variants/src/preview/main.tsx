@@ -1,6 +1,6 @@
-// Local-only preview of all three design variants (open /preview.html on the
+// Local-only preview of all four design variants (open /preview.html on the
 // dev server). Not part of the production build: vite build only bundles
-// index.html, so the Gothic/Stone themes and Variants 1 & 3 never ship.
+// index.html, so the Gothic/Stone themes and Variants 1, 3 & 4 never ship.
 import { StrictMode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import * as stylex from '@stylexjs/stylex';
@@ -15,17 +15,23 @@ import '@astryxdesign/theme-gothic/fonts.css';
 import { stoneTheme } from '@astryxdesign/theme-stone/built';
 import '@astryxdesign/theme-stone/theme.css';
 import '@astryxdesign/theme-stone/fonts.css';
+// Variant 4: Heritage on white — a light theme made with the Astryx theme
+// editor (themes/heritage-light/) from Gothic's fonts, accent and grays.
+// Gothic's fonts.css above supplies Fustat and Manufacturing Consent.
+import { heritageLightTheme } from '../themes/heritage-light/heritage-light.js';
+import '../themes/heritage-light/heritage-light.css';
 import '../index.css';
 import { themes } from '../astryx-themes';
 import type { PageKey } from '../shared/content';
 import { site } from '../site';
-import { v1 } from './v1';
+import { v1, v4 } from './v1';
 import { v3 } from './v3';
 
 const variants = {
   v1: { label: '1 · Heritage', def: v1, theme: gothicTheme },
   v2: { label: '2 · Community', def: site, theme: themes.butter },
   v3: { label: '3 · Bulletin', def: v3, theme: stoneTheme },
+  v4: { label: '4 · Heritage White', def: v4, theme: heritageLightTheme },
 } as const;
 type VKey = keyof typeof variants;
 const pageKeys: PageKey[] = ['home', 'calendar', 'join', 'gallery', 'contact'];

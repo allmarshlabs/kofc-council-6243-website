@@ -9,7 +9,8 @@ Hosted free on GitHub Pages.
 |---|---|
 | All wording (meetings, officers, contacts, copy) | `src/shared/content.ts` |
 | Main site build pages (currently the Community design) | `src/site/` |
-| All three variants side by side (local only) | `src/preview/`, open `/preview.html` |
+| All four variants side by side (local only) | `src/preview/`, open `/preview.html` |
+| Variant 4 theme (Heritage on white), made with the Astryx theme editor | `themes/heritage-light/` (change it with `npx astryx experimental theme editor set heritage-light …`) |
 | Official KofC logo, emblem, McGivney portrait | `public/kofc-official/` |
 | Old URLs (`join.html` etc.) redirecting to new pages | `public/*.html` |
 
@@ -20,7 +21,7 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:5173 (main site build) or http://localhost:5173/preview.html (all three variants).
+Then open http://localhost:5173 (main site build) or http://localhost:5173/preview.html (all four variants).
 
 ## Publish
 

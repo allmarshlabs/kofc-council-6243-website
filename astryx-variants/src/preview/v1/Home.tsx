@@ -31,7 +31,7 @@ import {
   pillars,
   principles,
 } from '../../shared/content';
-import {Shell, href} from './Shell';
+import {Shell, useHeritage} from './Shell';
 import {upcomingMeetings, formatShort, formatMonthDay} from './schedule';
 
 const styles = stylex.create({
@@ -41,7 +41,7 @@ const styles = stylex.create({
   },
   // Portrait sits on the right of the 16:9 painting: crop toward him.
   mcgivneyCrop: {objectPosition: '80% 30%'},
-  // Official emblem (reverse version, for the dark ground) as the hero seal.
+  // Official emblem (reverse on the dark ground, positive on white) as the hero seal.
   emblem: {padding: {default: 'var(--spacing-12)', '@media (max-width: 768px)': 'var(--spacing-2)'}},
   // On phones the full-width square leaves a lot of empty space; cap it.
   heroEmblem: {
@@ -72,10 +72,12 @@ function NextMeeting({group, value}: {group: string; value: string}) {
 // stands for the organization. (The McGivney portrait is in the founder section.)
 
 function HeroImage() {
+  // Reverse (light) emblem on Variant 1's dark ground; positive on white.
+  const {emblemSrc} = useHeritage();
   return (
     <AspectRatio ratio={1} fit="contain" xstyle={styles.heroEmblem}>
       <img
-        src={assets.emblemReverse}
+        src={emblemSrc}
         alt="Knights of Columbus emblem"
         {...stylex.props(styles.emblem)}
       />
@@ -114,6 +116,7 @@ const NUMERALS = ['I', 'II', 'III', 'IV'];
 // ─── Main Page ──────────────────────────────────────────────────────────────
 
 export default function Home({current}: PageProps) {
+  const {href} = useHeritage();
   // The next meeting for each group (from the meeting rhythm in content.ts),
   // shown soonest first.
   const upcoming = upcomingMeetings(6);

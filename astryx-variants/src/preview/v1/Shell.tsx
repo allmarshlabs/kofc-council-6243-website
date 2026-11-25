@@ -14,8 +14,8 @@ import {Section} from '@astryxdesign/core/Section';
 import {Text} from '@astryxdesign/core/Text';
 import {Link} from '@astryxdesign/core/Link';
 import {Divider} from '@astryxdesign/core/Divider';
-import {assets, council, navItems, type PageKey} from '../../shared/content';
-import {MODE} from './mode';
+import {council, navItems, type PageKey} from '../../shared/content';
+import {useHeritage} from './mode';
 
 const styles = stylex.create({
   // Thin vertical rule between the official lockup and the council label.
@@ -37,10 +37,8 @@ const styles = stylex.create({
   footerLogo: {height: {default: 64, '@media (max-width: 768px)': 48}, width: 'auto', display: 'block', alignSelf: 'flex-start'},
 });
 
-export const logoSrc =
-  MODE === 'dark' ? assets.logoHorizontalReverseTrim : assets.logoHorizontalTrim;
-
-export const href = (page: PageKey) => `#/v1/${page}`;
+// Links and official artwork depend on which Heritage flavour is rendering.
+export {useHeritage};
 
 export function Shell({
   current,
@@ -54,6 +52,7 @@ export function Shell({
   const isPhone = useMediaQuery('(max-width: 640px)', false);
   // On very narrow phones the council's second line would truncate; show just the number.
   const isNarrow = useMediaQuery('(max-width: 380px)', false);
+  const {href, logoSrc} = useHeritage();
   return (
     <AppShell
       variant="section"
@@ -91,6 +90,7 @@ export function Shell({
 // Knight" moves into the drawer list instead of crowding the compact bar.
 function NavItems({current}: {current: PageKey}) {
   const {isMobile} = useAppShellMobile();
+  const {href} = useHeritage();
   return (
     <>
       {navItems
@@ -109,11 +109,13 @@ function NavItems({current}: {current: PageKey}) {
 
 function JoinAction() {
   const {isMobile} = useAppShellMobile();
+  const {href} = useHeritage();
   if (isMobile) return null;
   return <Button label="Become a Knight" variant="primary" href={href('join')} />;
 }
 
 function SiteFooter({isPhone}: {isPhone: boolean}) {
+  const {href, logoSrc} = useHeritage();
   return (
     <Section
       variant="transparent"

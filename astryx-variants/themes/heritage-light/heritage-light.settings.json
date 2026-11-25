@@ -1,0 +1,89 @@
+{
+  "name": "heritage-light",
+  "mode": "light-only",
+  "settings": [
+    {
+      "thing": "corners",
+      "value": "medium",
+      "source": "dial"
+    },
+    {
+      "thing": "accent",
+      "value": "#101314",
+      "source": "dial"
+    },
+    {
+      "thing": "neutral",
+      "value": "#5d646b",
+      "source": "dial"
+    },
+    {
+      "thing": "danger",
+      "value": "#a8463a",
+      "source": "dial"
+    },
+    {
+      "thing": "info",
+      "value": "#6170bf",
+      "source": "dial"
+    },
+    {
+      "thing": "font",
+      "value": "Fustat",
+      "source": "dial"
+    },
+    {
+      "thing": "font-family",
+      "value": "\"Manufacturing Consent\", \"UnifrakturMaguntia\", \"Old English Text MT\", serif",
+      "source": "property",
+      "on": "text",
+      "when": "type:display-1"
+    },
+    {
+      "thing": "font-family",
+      "value": "\"Manufacturing Consent\", \"UnifrakturMaguntia\", \"Old English Text MT\", serif",
+      "source": "property",
+      "on": "text",
+      "when": "type:display-2"
+    },
+    {
+      "thing": "font-family",
+      "value": "\"Manufacturing Consent\", \"UnifrakturMaguntia\", \"Old English Text MT\", serif",
+      "source": "property",
+      "on": "text",
+      "when": "type:display-3"
+    },
+    {
+      "thing": "success",
+      "value": "#709557",
+      "source": "dial"
+    },
+    {
+      "thing": "--color-background-body",
+      "value": "#ffffff",
+      "source": "token",
+      "mode": "light"
+    },
+    {
+      "thing": "background-color",
+      "value": "#ffffff",
+      "source": "property",
+      "on": "app-shell",
+      "mode": "light"
+    },
+    {
+      "thing": "background-color",
+      "value": "#ffffff",
+      "source": "property",
+      "on": "layout-content",
+      "mode": "light"
+    },
+    {
+      "thing": "warning",
+      "value": "#b19142",
+      "source": "dial"
+    }
+  ],
+  "palette": "57d7f4eb2aa1fdeeee141d78ec3577c5610ec1dc8f1fa1448bf55956b6583719",
+  "lifted": []
+}

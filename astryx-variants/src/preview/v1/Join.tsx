@@ -48,7 +48,7 @@ import {
   pillars,
   principles,
 } from '../../shared/content';
-import {Shell, href} from './Shell';
+import {Shell, useHeritage} from './Shell';
 
 // Custom CSS limited to what Astryx components can't express today:
 // the sticky enroll rail (no sticky prop on layout primitives) and image
@@ -278,6 +278,7 @@ function FaqSection() {
 
 // ─── Join rail (was: Enroll rail) ───────────────────────────────────────────
 function JoinRail() {
+  const {href} = useHeritage();
   return (
     <Card padding={5}>
       <VStack gap={4}>
