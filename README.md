@@ -3,7 +3,7 @@
 Redesign of the Council 6243 (Our Lady of Mount Carmel, Williamsburg, Brooklyn) website,
 built with Meta's [Astryx](https://astryx.atmeta.com/) design system.
 
-**Live site: https://olmcknights6243.org** (published from this repo by GitHub Pages on every push to `main`).
+**Live site: https://olmcknights6243.org** (published from this repo by GitHub Pages whenever a change is merged into `main`).
 
 - **`astryx-variants/`** — the new site, in four design variants: 1 "Heritage", 2 "Community",
   3 "Bulletin" and 4 "Heritage White" (Heritage on a white background). **The council chose Heritage White**;
@@ -32,3 +32,14 @@ browser window or use your browser's device toolbar.
 
 More detail (editing content, the contact form, the gallery, publishing) is in
 [`astryx-variants/README.md`](astryx-variants/README.md).
+
+## Making changes
+
+`main` is protected: every change, including the maintainer's, goes through a pull request.
+
+1. Fork this repo (or, with write access, create a branch) and make your change.
+2. Preview it locally with `npm run dev` (see above).
+3. Open a pull request into `main`. The **Build check** builds the site from your change and must
+   pass (✓) before the pull request can be merged.
+4. Once the pull request is merged, the site republishes to https://olmcknights6243.org about a
+   minute later.
