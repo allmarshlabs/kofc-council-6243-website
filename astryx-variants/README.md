@@ -31,26 +31,19 @@ minute later). To re-publish without a change: Actions tab → Deploy to GitHub 
 The repo is public, which is what makes GitHub Pages free. Pages is set to **Source: GitHub
 Actions** (Settings → Pages).
 
-Until the custom domain is connected, the site is at
-https://allmarshlabs.github.io/kofc-council-6243-website/.
+**Live at https://olmcknights6243.org** (domain registered at Namecheap; `www.` and the old
+`allmarshlabs.github.io/kofc-council-6243-website/` address redirect there). HTTPS is enforced; GitHub
+renews the certificate automatically. No `CNAME` file is needed (GitHub ignores it when an Actions
+workflow deploys); the domain is set under **Settings → Pages → Custom domain**.
 
-**Custom domain: `olmcknights6243.org`.** No `CNAME` file is needed (GitHub ignores it when an
-Actions workflow deploys). Once the site is published:
+DNS at Namecheap (**Domain List → Manage → Advanced DNS**) — keep these as they are:
 
-1. At the domain registrar, add these DNS records:
-
-   | Type  | Name / host | Value                                                                |
-   | ----- | ----------- | -------------------------------------------------------------------- |
-   | A     | `@`         | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (one record each) |
-   | AAAA  | `@`         | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` (optional, IPv6) |
-   | CNAME | `www`       | `allmarshlabs.github.io`                                             |
-
-   Remove any default "parking" A/CNAME records the registrar added for `@` or `www`.
-2. Recommended first: verify the domain for the organization (**AllMarsh Labs → Settings → Pages →
-   Add a domain**). GitHub gives you a TXT record to add, which stops anyone else's repo from
-   claiming the domain.
-3. In this repo: **Settings → Pages → Custom domain** → `olmcknights6243.org` → Save. When the
-   DNS check passes, tick **Enforce HTTPS** (the certificate can take up to an hour or so).
+| Type  | Host                                  | Value                                                            |
+| ----- | ------------------------------------- | ---------------------------------------------------------------- |
+| A     | `@`                                   | `185.199.108.153`, `.109.153`, `.110.153`, `.111.153` (4 records) |
+| CNAME | `www`                                 | `allmarshlabs.github.io`                                         |
+| TXT   | `_github-pages-challenge-allmarshlabs` | GitHub's verification code (keeps the domain verified for the AllMarsh Labs org, so no other GitHub account can claim it) |
+| TXT   | `@`                                   | `v=spf1 include:spf.efwd.registrar-servers.com ~all` (Namecheap email forwarding, unrelated to the site) |
 
 ## Contact form (Google Forms)
 

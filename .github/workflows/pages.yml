@@ -1,6 +1,6 @@
 # Builds the Astryx site in astryx-variants/ and publishes it to GitHub Pages.
 # One-time setup in GitHub: Settings -> Pages -> Source: "GitHub Actions".
-# Custom domain: olmcknights6243.org — set it under Settings -> Pages (Actions
+# Custom domain: olmcknights6243.org (live) — set under Settings -> Pages (Actions
 # deploys ignore a CNAME file). DNS steps are in astryx-variants/README.md.
 name: Deploy to GitHub Pages
 

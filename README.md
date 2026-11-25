@@ -3,6 +3,8 @@
 Redesign of the Council 6243 (Our Lady of Mount Carmel, Williamsburg, Brooklyn) website,
 built with Meta's [Astryx](https://astryx.atmeta.com/) design system.
 
+**Live site: https://olmcknights6243.org** (published from this repo by GitHub Pages on every push to `main`).
+
 - **`astryx-variants/`** — the new site, in four design variants: 1 "Heritage", 2 "Community",
   3 "Bulletin" and 4 "Heritage White" (Heritage on a white background). **The council chose Heritage White**;
   it is the live site. The other three stay in the local preview for reference.
