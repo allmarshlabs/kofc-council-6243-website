@@ -4,10 +4,9 @@
 // Kept: Layout with divided LayoutHeader (h1 + bulleted metadata row +
 // actions that drop below on narrow screens), stacked Sections in
 // LayoutContent, and the 320px `end` LayoutPanel that folds under the content
-// below 1024px. Replaced: order line items → the meeting rhythm; activity
-// timeline → computed upcoming dates; invoice → the Google Calendar embed;
-// side-panel collapsibles → where-we-meet details. Removed: tabs, panel toggle,
-// reactions, demo toasts and dialogs.
+// below 1024px. Replaced: activity timeline → computed upcoming dates; invoice → the Google Calendar embed;
+// side-panel collapsibles → where-we-meet details. Removed: order line items, tabs,
+// panel toggle, reactions, demo toasts and dialogs.
 
 import * as stylex from '@stylexjs/stylex';
 import {useMediaQuery} from '@astryxdesign/core/hooks';
@@ -26,18 +25,15 @@ import {Text, Heading} from '@astryxdesign/core/Text';
 import {Badge} from '@astryxdesign/core/Badge';
 import {Button} from '@astryxdesign/core/Button';
 import {Link} from '@astryxdesign/core/Link';
-import {List, ListItem} from '@astryxdesign/core/List';
 import {MetadataList, MetadataListItem} from '@astryxdesign/core/MetadataList';
-import {Banner} from '@astryxdesign/core/Banner';
 import {Icon} from '@astryxdesign/core/Icon';
 import {AspectRatio} from '@astryxdesign/core/AspectRatio';
 import {
-  CalendarDaysIcon,
   EnvelopeIcon,
   MapPinIcon,
 } from '@heroicons/react/24/outline';
 import type {PageProps} from '../App';
-import {council, meetings, meetingsNote} from '../shared/content';
+import {council} from '../shared/content';
 import {Shell} from './Shell';
 import {upcomingMeetings, formatLong} from './schedule';
 
@@ -80,7 +76,6 @@ function PageHeader({isNarrow}: {isNarrow: boolean}) {
               <Text type="display-2" as="h1">
                 Council calendar
               </Text>
-              {/* The schedule is explained once, in Meeting rhythm below. */}
             </VStack>
           </StackItem>
           {!isNarrow && <HStack gap={2}>{actions}</HStack>}
@@ -92,34 +87,6 @@ function PageHeader({isNarrow}: {isNarrow: boolean}) {
         )}
       </VStack>
     </LayoutHeader>
-  );
-}
-
-// ─── Meeting rhythm (was: Items) ────────────────────────────────────────────
-function RhythmSection() {
-  return (
-    <Section>
-      <VStack gap={4}>
-        <Heading level={2}>Meeting rhythm</Heading>
-        <List density="spacious" edge="outset" hasDividers>
-          {meetings.map(m => (
-            <ListItem
-              key={m.title}
-              label={<Text type="large" weight="semibold">{m.title}</Text>}
-              description={
-                <Text type="body" color="secondary">
-                  {m.when}
-                </Text>
-              }
-              startContent={
-                <Icon icon={CalendarDaysIcon} size="lg" color="accent" />
-              }
-            />
-          ))}
-        </List>
-        <Banner status="info" title={meetingsNote} />
-      </VStack>
-    </Section>
   );
 }
 
@@ -232,7 +199,6 @@ export default function CalendarPage({current}: PageProps) {
         content={
           <LayoutContent isScrollable={false}>
             <VStack gap={4}>
-              <RhythmSection />
               <UpcomingSection />
               <EmbedSection isNarrow={isNarrow} />
               {isNarrow && (
