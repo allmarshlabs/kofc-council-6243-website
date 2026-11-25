@@ -25,7 +25,7 @@ export const council = {
   fullName: 'Knights of Columbus Council 6243',
   location: 'Williamsburg, Brooklyn',
   // Where the council meets: its own hall, not the church.
-  hallName: 'Sonny Mangone Hall',
+  hallName: 'O.L. of Mt. Carmel Knights of Columbus Hall',
   address: '16 Havemeyer Street, Brooklyn, NY 11211',
   directionsUrl: 'https://www.google.com/maps/search/?api=1&query=16+Havemeyer+St+Brooklyn+NY+11211',
   // The parish the council serves (kept for the "Visit our parish" link).
