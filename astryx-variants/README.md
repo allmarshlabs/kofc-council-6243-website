@@ -29,8 +29,23 @@ when started by hand (Actions tab → Deploy to GitHub Pages → Run workflow), 
 private repos needs a paid plan. When the repo goes public, re-enable the push trigger noted in
 the workflow. One-time: **Settings → Pages → Source: GitHub Actions**.
 
-**Custom domain (later):** create `public/CNAME` containing just the domain (e.g. `kofc6243.org`),
-push, then enter the same domain under Settings → Pages and add the DNS records GitHub shows.
+**Custom domain: `olmcknights6243.org`.** No `CNAME` file is needed (GitHub ignores it when an
+Actions workflow deploys). Once the site is published:
+
+1. At the domain registrar, add these DNS records:
+
+   | Type  | Name / host | Value                                                                |
+   | ----- | ----------- | -------------------------------------------------------------------- |
+   | A     | `@`         | `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (one record each) |
+   | AAAA  | `@`         | `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153` (optional, IPv6) |
+   | CNAME | `www`       | `allmarshlabs.github.io`                                             |
+
+   Remove any default "parking" A/CNAME records the registrar added for `@` or `www`.
+2. Recommended first: verify the domain for the organization (**AllMarsh Labs → Settings → Pages →
+   Add a domain**). GitHub gives you a TXT record to add, which stops anyone else's repo from
+   claiming the domain.
+3. In this repo: **Settings → Pages → Custom domain** → `olmcknights6243.org` → Save. When the
+   DNS check passes, tick **Enforce HTTPS** (the certificate can take up to an hour or so).
 
 ## Contact form (Google Forms)
 
