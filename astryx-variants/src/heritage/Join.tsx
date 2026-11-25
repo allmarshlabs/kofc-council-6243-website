@@ -4,7 +4,7 @@
 // SectionHeader, and the sticky enrollment rail Card. Replaced: course head →
 // join head; about → why join + principles; syllabus → join.steps; instructor
 // → volunteer / Ladies Auxiliary; reviews → the four pillars; FAQ → questions
-// answered from content.ts; rail → eligibility + "Join online". Removed:
+// answered from content.ts; rail → council number + "Join online" + meetings. Removed:
 // pricing, ratings, sliders, cohort pickers and demo toasts.
 
 import * as stylex from '@stylexjs/stylex';
@@ -30,7 +30,6 @@ import {Collapsible, CollapsibleGroup} from '@astryxdesign/core/Collapsible';
 import {rtlStyles} from '@astryxdesign/core/utils';
 import {useMediaQuery} from '@astryxdesign/core/hooks';
 import {
-  CheckIcon,
   ArrowRightIcon,
   MapPinIcon,
   CalendarDaysIcon,
@@ -324,16 +323,6 @@ function JoinRail() {
             }
           />
           <Button label="Ask us a question" size="lg" href={href('contact')} />
-        </VStack>
-        <Divider />
-        <VStack gap={2}>
-          <Text type="label">Who can join</Text>
-          <HStack gap={2} vAlign="start">
-            <Icon icon={CheckIcon} size="sm" />
-            <Text type="body" color="secondary">
-              {join.eligibility}
-            </Text>
-          </HStack>
         </VStack>
         <Divider />
         <VStack gap={2}>
