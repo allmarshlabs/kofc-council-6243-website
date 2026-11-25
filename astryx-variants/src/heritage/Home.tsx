@@ -7,6 +7,7 @@
 
 import * as stylex from '@stylexjs/stylex';
 import {VStack, HStack, Layout, LayoutContent} from '@astryxdesign/core/Layout';
+import {useMediaQuery} from '@astryxdesign/core/hooks';
 import {Text, Heading} from '@astryxdesign/core/Text';
 import {Button} from '@astryxdesign/core/Button';
 import {AspectRatio} from '@astryxdesign/core/AspectRatio';
@@ -49,6 +50,15 @@ const styles = stylex.create({
     maxWidth: {default: 'none', '@media (max-width: 768px)': 240},
     marginInline: 'auto',
   },
+  // Principles: the numeral sits on the same text line as the blackletter
+  // name (Stack has no baseline option), and a fixed numeral column keeps
+  // the names and their captions on one left edge across all four degrees.
+  degreeRow: {alignItems: 'baseline', columnGap: 'var(--spacing-3)'},
+  // Right-aligned in a column as wide as "III", so each numeral sits snug
+  // against its name and the four names still share one left edge.
+  numeral: {minWidth: '1.6em', textAlign: 'end'},
+  // Comfortable reading measure for the intro paragraph.
+  measure: {maxWidth: 680},
 });
 
 // ─── Stat Block ─────────────────────────────────────────────────────────────
@@ -111,12 +121,22 @@ function SectionHeader({
   );
 }
 
-const NUMERALS = ['I', 'II', 'III', 'IV'];
+// Each principle is one of the Order's degrees, in order.
+const DEGREES = [
+  {numeral: 'I', name: 'First Degree'},
+  {numeral: 'II', name: 'Second Degree'},
+  {numeral: 'III', name: 'Third Degree'},
+  {numeral: 'IV', name: 'Fourth Degree'},
+];
 
 // ─── Main Page ──────────────────────────────────────────────────────────────
 
 export default function Home({current}: PageProps) {
   const {href} = useHeritage();
+  // Four degrees read as one row, a 2 × 2 block, or a list — never 3 + 1.
+  const isWide = useMediaQuery('(min-width: 1100px)');
+  const isPhone = useMediaQuery('(max-width: 600px)');
+  const degreeColumns = isWide ? 4 : isPhone ? 1 : 2;
   // The next meeting for each group (from the meeting rhythm in content.ts),
   // shown soonest first.
   const upcoming = upcomingMeetings(6);
@@ -199,32 +219,44 @@ export default function Home({current}: PageProps) {
                 <HeroImage />
               </Grid>
 
-              {/* Principles */}
+              {/* Principles — the four degrees of the Order */}
               <Section
-                paddingBlock={8}
+                paddingBlock={10}
                 paddingInline={6}
                 dividers={['top', 'bottom']}
                 variant="transparent">
-                <VStack gap={6}>
-                  <SectionHeader
-                    eyebrow="Since 1882"
-                    title="Our principles"
-                  />
-                  <Grid columns={{minWidth: 150, repeat: 'fit'}} gap={6}>
+                <VStack gap={8}>
+                  <VStack gap={3}>
+                    <SectionHeader eyebrow="Since 1882" title="Our principles" />
+                    <Text type="large" color="secondary" xstyle={styles.measure}>
+                      {council.givingNote}
+                    </Text>
+                  </VStack>
+                  <Grid
+                    columns={degreeColumns}
+                    columnGap={6}
+                    rowGap={isPhone ? 5 : 8}>
                     {principles.map((p, i) => (
-                      <VStack key={p} gap={1}>
-                        <Text type="supporting" color="secondary" weight="semibold">
-                          {NUMERALS[i]}
+                      <HStack key={p} gap={0} xstyle={styles.degreeRow}>
+                        <Text
+                          type="large"
+                          weight="semibold"
+                          color="secondary"
+                          aria-hidden
+                          xstyle={styles.numeral}>
+                          {DEGREES[i].numeral}
                         </Text>
-                        <Text type="display-3" as="h3" color="accent">
-                          {p}
-                        </Text>
-                      </VStack>
+                        <VStack gap={1}>
+                          <Text type="display-3" as="h3" color="accent">
+                            {p}
+                          </Text>
+                          <Text type="supporting" color="secondary">
+                            {DEGREES[i].name}
+                          </Text>
+                        </VStack>
+                      </HStack>
                     ))}
                   </Grid>
-                  <Text type="large" color="secondary">
-                    {council.givingNote}
-                  </Text>
                 </VStack>
               </Section>
 
