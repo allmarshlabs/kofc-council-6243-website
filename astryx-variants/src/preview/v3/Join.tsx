@@ -286,12 +286,14 @@ export default function Join({ current }: PageProps) {
               xstyle={hasRail && !hasGuidance ? styles.footerLean : undefined}
             >
               <HStack gap={3} vAlign="center" width="100%" maxWidth={MEASURE}>
-                <Button
-                  label="Back"
-                  variant="secondary"
-                  isDisabled={step === 0}
-                  onClick={() => setStep((s) => Math.max(0, s - 1))}
-                />
+                {/* No Back on the first step: a disabled button there reads as broken. */}
+                {step > 0 && (
+                  <Button
+                    label="Back"
+                    variant="secondary"
+                    onClick={() => setStep((s) => s - 1)}
+                  />
+                )}
                 <StackItem size="fill" />
                 {isLastStep ? (
                   <Button
